@@ -9,7 +9,10 @@ const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 const db = require("./db");
 
-const serviceAccount = require("./serviceAccountKey.json");
+
+const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT
+  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+  : require("./serviceAccountKey.json");
 
 const firebaseApp = initializeApp({
   credential: cert(serviceAccount),
