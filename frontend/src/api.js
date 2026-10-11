@@ -1,49 +1,29 @@
+
 const API_URL = (
   import.meta.env.VITE_API_URL || "http://localhost:5000"
 ).replace(/\/+$/, "");
 
-export async function apiRequest(path, options = {}) {
+export async function api(path, options = {}) {
+  const { token, headers, ...fetchOptions } = options;
+
   const response = await fetch(`${API_URL}${path}`, {
-    ...options,
+    ...fetchOptions,
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(headers || {}),
     },
   });
 
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.message || data.error || "Request failed");
+    throw new Error(
+      data.message || data.error || `Request failed (${response.status})`
+    );
   }
 
   return data;
 }
 
-export const api = {
-  request: apiRequest,
-
-  get(path, options = {}) {
-    return apiRequest(path, { ...options, method: "GET" });
-  },
-
-  post(path, body, options = {}) {
-    return apiRequest(path, {
-      ...options,
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-  },
-
-  put(path, body, options = {}) {
-    return apiRequest(path, {
-      ...options,
-      method: "PUT",
-      body: JSON.stringify(body),
-    });
-  },
-
-  delete(path, options = {}) {
-    return apiRequest(path, { ...options, method: "DELETE" });
-  },
-};
+export const apiRequest = api;

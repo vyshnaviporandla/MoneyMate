@@ -285,8 +285,8 @@ async function handleAuth(e) {
     return (
       <div className="auth-screen">
         <div className="auth-art">
-          <div className="brand"><span className="brand-icon"><Wallet /></span> <MoneyMate>
-            </MoneyMate></div>
+          <div className="brand"><span className="brand-icon"><Wallet /></span>MoneyMate
+          </div>
           <div className="art-copy">
             <span className="eyebrow">YOUR MONEY. YOUR FUTURE.</span>
             <h1>Small steps.<br /><span>Smarter money.</span></h1>
@@ -301,7 +301,7 @@ async function handleAuth(e) {
         </div>
         <div className="auth-panel">
           <form className="auth-form" onSubmit={handleAuth}>
-            <div className="mobile-brand"><Wallet /> <MoneyMate></MoneyMate></div>
+            <div className="mobile-brand"><Wallet />MoneyMate</div>
             <span className="eyebrow">STUDENT FINANCE, SIMPLIFIED</span>
             <h2>{authMode === "login" ? "Welcome back!" : "Create your account"}</h2>
             <p className="muted">{authMode === "login" ? "Log in to your personal finance space." : "Start building smarter money habits today."}</p>
