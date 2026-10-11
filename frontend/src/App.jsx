@@ -285,7 +285,8 @@ async function handleAuth(e) {
     return (
       <div className="auth-screen">
         <div className="auth-art">
-          <div className="brand"><span className="brand-icon"><Wallet /></span> MoneyWise</div>
+          <div className="brand"><span className="brand-icon"><Wallet /></span> <MoneyMate>
+            </MoneyMate></div>
           <div className="art-copy">
             <span className="eyebrow">YOUR MONEY. YOUR FUTURE.</span>
             <h1>Small steps.<br /><span>Smarter money.</span></h1>
@@ -300,14 +301,14 @@ async function handleAuth(e) {
         </div>
         <div className="auth-panel">
           <form className="auth-form" onSubmit={handleAuth}>
-            <div className="mobile-brand"><Wallet /> MoneyWise</div>
+            <div className="mobile-brand"><Wallet /> <MoneyMate></MoneyMate></div>
             <span className="eyebrow">STUDENT FINANCE, SIMPLIFIED</span>
             <h2>{authMode === "login" ? "Welcome back!" : "Create your account"}</h2>
             <p className="muted">{authMode === "login" ? "Log in to your personal finance space." : "Start building smarter money habits today."}</p>
             {authMode === "register" && <label>Full name<input required maxLength="80" value={auth.name} onChange={e => setAuth({ ...auth, name: e.target.value })} placeholder="Your name" /></label>}
             <label>Email address<input type="email" required value={auth.email} onChange={e => setAuth({ ...auth, email: e.target.value })} placeholder="you@example.com" /></label>
             <label>Password<input type="password" required minLength="8" maxLength="128" value={auth.password} onChange={e => setAuth({ ...auth, password: e.target.value })} placeholder="At least 8 characters" /></label>
-            <button className="primary full" disabled={busy}>{busy ? "Please wait..." : authMode === "login" ? "Log in to MoneyWise" : "Create account"} <ArrowUpRight size={17} /></button>
+            <button className="primary full" disabled={busy}>{busy ? "Please wait..." : authMode === "login" ? "Log in to MoneyMate" : "Create account"} <ArrowUpRight size={17} /></button>
             <p className="switch-auth">{authMode === "login" ? "New here?" : "Already have an account?"} <button type="button" className="link-button" onClick={() => setAuthMode(authMode === "login" ? "register" : "login")}>{authMode === "login" ? "Create an account" : "Log in"}</button></p>
             <div className="safe-note"><ShieldCheck size={17} /> Your finance records are private to your account. Never enter banking passwords, UPI PINs or OTPs.</div>
           </form>
@@ -335,7 +336,7 @@ const nav = [
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div className="brand"><span className="brand-icon"><Wallet /></span> MoneyWise</div>
+        <div className="brand"><span className="brand-icon"><Wallet /></span> MoneyMate</div>
         <div className="side-caption">YOUR FINANCE SPACE</div>
         <nav>{nav.map(([name, Icon]) => <button key={name} className={`nav-item ${page === name ? "active" : ""}`} onClick={() => name === "Money Quiz" ? startQuiz() : setPage(name)}><Icon size={18} />{name}</button>)}</nav>
         <div className="sidebar-bottom"><div className="profile"><div className="avatar">{(user?.name || "S").slice(0, 1).toUpperCase()}</div><div><strong>{user?.name || "Student"}</strong><small>Student account</small></div></div><button className="logout" onClick={logout}><LogOut size={17} /> Log out</button></div>
@@ -409,7 +410,7 @@ const nav = [
             </section>
           )}
 
-        <footer className="app-footer">MoneyWise · A student finance education project · Demo data stays in your local database.</footer>
+        <footer className="app-footer">MoneyMate · A student finance education project · Demo data stays in your local database.</footer>
       </main>
     </div>
   );
