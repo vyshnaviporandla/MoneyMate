@@ -1,0 +1,6 @@
+serviceAccountKey.json
+.env
+node_modules/
+moneywise.db
+moneywise.db-shm
+moneywise.db-wal
