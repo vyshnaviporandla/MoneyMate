@@ -10,13 +10,27 @@ const { getAuth } = require("firebase-admin/auth");
 const db = require("./db");
 
 
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT
-  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
-  : require("./serviceAccountKey.json");
+
+const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT;
+
+if (!serviceAccountJson) {
+  console.error("Missing FIREBASE_SERVICE_ACCOUNT environment variable.");
+  process.exit(1);
+}
+
+let serviceAccount;
+
+try {
+  serviceAccount = JSON.parse(serviceAccountJson);
+} catch {
+  console.error("FIREBASE_SERVICE_ACCOUNT must contain valid JSON.");
+  process.exit(1);
+}
 
 const firebaseApp = initializeApp({
   credential: cert(serviceAccount),
 });
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
